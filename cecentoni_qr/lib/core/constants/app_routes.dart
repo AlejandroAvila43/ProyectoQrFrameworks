@@ -12,4 +12,5 @@ class AppRoutes {
   static const String resultado = '/resultado';
   static const String historial = '/historial';
   static const String perfil = '/perfil';
+  static const String crearPedido = '/crear-pedido';
 }

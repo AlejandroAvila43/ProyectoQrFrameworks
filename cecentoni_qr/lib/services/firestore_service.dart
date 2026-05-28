@@ -85,6 +85,18 @@ class FirestoreService {
     await _pedidos.doc(pedidoId).update({'estatus': estatus.name});
   }
 
+  Future<String> crearPedido(PedidoModel pedido) async {
+    try {
+      final docRef = _pedidos.doc(); // Autogenerar documento para obtener ID
+      final customId = 'pedido_${docRef.id}';
+      final finalPedido = pedido.copyWith(id: customId);
+      await _pedidos.doc(customId).set(finalPedido.toMap());
+      return customId;
+    } catch (e) {
+      throw FirestoreException('Error al crear pedido: ${e.toString()}');
+    }
+  }
+
   // ── VERIFICACIONES ───────────────────────────────────────────────────────
 
   Future<String> guardarVerificacion(VerificacionModel verificacion) async {

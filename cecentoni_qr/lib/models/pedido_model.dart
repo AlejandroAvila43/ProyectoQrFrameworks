@@ -67,7 +67,7 @@ class PedidoModel {
     return PedidoModel(
       id: docId,
       numeroPedido: numeroPedido,
-      cliente: map['cliente'] as String? ?? 'Sin nombre',
+      cliente: map['cliente'] as String? ?? map['nombre'] as String? ?? 'Sin nombre',
       productoEsperado: productoEsperado,
       estatus: estatus,
       fechaEntrega: fechaEntrega,
@@ -78,6 +78,7 @@ class PedidoModel {
   Map<String, dynamic> toMap() {
     return {
       'cliente': cliente,
+      'nombre': cliente, // Duplicado para compatibilidad en base de datos
       'productoEsperado': productoEsperado.modelo,
       'color': productoEsperado.color,
       'medida': productoEsperado.medida,

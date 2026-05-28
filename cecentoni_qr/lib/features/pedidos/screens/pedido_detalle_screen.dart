@@ -1,8 +1,10 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gap/gap.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import '../providers/pedidos_provider.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_routes.dart';
@@ -122,6 +124,67 @@ class PedidoDetalleScreen extends ConsumerWidget {
                 icon: Icons.qr_code_scanner,
                 onPressed: () => context.push(AppRoutes.qrScanner),
               ).animate().fadeIn(delay: 400.ms).slideY(begin: 0.2),
+
+              const Gap(24),
+
+              Center(
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: AppColors.shadow,
+                        blurRadius: 10,
+                        offset: Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Text(
+                        'Código QR del Pedido',
+                        style: TextStyle(
+                          color: AppColors.primary,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                        ),
+                      ),
+                      const Gap(12),
+                      QrImageView(
+                        data: jsonEncode({
+                          'modelo': producto.modelo,
+                          'color': producto.color,
+                          'medida': producto.medida,
+                          'lote': producto.lote,
+                        }),
+                        version: QrVersions.auto,
+                        size: 180.0,
+                        gapless: false,
+                        errorStateBuilder: (cxt, err) {
+                          return const Center(
+                            child: Text(
+                              'Error al generar QR',
+                              style: TextStyle(color: AppColors.error),
+                            ),
+                          );
+                        },
+                      ),
+                      const Gap(8),
+                      Text(
+                        'Lote: ${producto.lote}',
+                        style: const TextStyle(
+                          color: AppColors.onSurfaceLight,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ).animate().fadeIn(delay: 500.ms),
             ],
           ),
         ),

@@ -1,10 +1,10 @@
+import 'package:cecentoni_qr/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
-import 'firebase_options.dart';
 import 'core/constants/app_routes.dart';
 import 'core/theme/app_theme.dart';
 import 'features/auth/providers/auth_provider.dart';
@@ -15,6 +15,7 @@ import 'features/auth/screens/login_screen.dart';
 import 'features/home/screens/home_screen.dart';
 import 'features/pedidos/screens/pedidos_list_screen.dart';
 import 'features/pedidos/screens/pedido_detalle_screen.dart';
+import 'features/pedidos/screens/crear_pedido_screen.dart';
 import 'features/qr/screens/qr_scanner_screen.dart';
 import 'features/validacion/screens/resultado_screen.dart';
 import 'features/historial/screens/historial_screen.dart';
@@ -23,9 +24,10 @@ import 'features/perfil/screens/perfil_screen.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+ await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+
+ );
 
   await initializeDateFormatting('es', null);
 
@@ -103,6 +105,10 @@ class CecentoniApp extends ConsumerWidget {
         GoRoute(
           path: AppRoutes.qrScanner,
           builder: (_, __) => const QrScannerScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.crearPedido,
+          builder: (_, __) => const CrearPedidoScreen(),
         ),
         GoRoute(
           path: AppRoutes.resultado,
