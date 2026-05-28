@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "393186061261",
+    "project_id": "cecentoni-qr",
+    "storage_bucket": "cecentoni-qr.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:393186061261:android:daa8296433485349b3b284",
+        "android_client_info": {
+          "package_name": "com.example.cecentoni_qr"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCoOwR_OqwfCyBMHm4Z9PFuRsa6yAidOM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
